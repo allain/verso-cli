@@ -7,13 +7,13 @@
     <div id="app"></div>
     <script src="/verso.js"></script>
     <script>
-        console.time('initial render')
         var initialUri = '/'
         if (window.location.hash) {
             initialUri = window.location.hash.substr(1)
         }
+
+				console.log('using pages spec:', app.pages)
         app.run(initialUri, document.getElementById('app'))
-        console.timeEnd('initial render')
     </script>
 </body>
 

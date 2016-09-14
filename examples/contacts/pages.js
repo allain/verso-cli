@@ -1,18 +1,23 @@
 module.exports = {
 	'/' : {
 		render: (contacts) => {
-			return `<ul>${contacts.map(contact => {
-				let {id,name} = contact
+		  let contactsHtml = Object.keys(contacts).map(id => {
+				let {name} = contacts[id]
 				return `<li><a href="/contact/${id}">${name}</a></li>`
-			}).join('')}</ul>`.replace(/>\s*</g, '><')
+			}).join('')
+
+			return `<ul>${contactsHtml}</ul>`.replace(/>\s*</g, '><')
+		},
+
+		customize: (el) => {
+			console.log(el.querySelectorAll('li'))
 		}
 	},
 
 	'/contact/:id': (id, contacts) => {
-		let contact = contacts.find(c => c.id == id)
 		return `<div>
       <div><a href="/">Home</a></div>
-			<h1>${contact.name}'s Page</h1>
+			<h1>${contacts[id].name}'s Page</h1>
 		</div>`.replace(/>\s*</g, '><')
 	}
 }
